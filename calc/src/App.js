@@ -3,6 +3,9 @@ import { useState } from "react";
 
 function App() {
   let [value, setValue] = useState("");
+  let sign;
+  let firstNumber = 0;
+  let secondNumber;
 
   function handleClick(e) {
     // Updating state when the number buttons are clicked
@@ -31,6 +34,24 @@ function App() {
     } else if (e === "del") {
       setValue(value.slice(0, -1));
     }
+  }
+
+  function handleOperation(operator) {
+    sign = operator;
+    firstNumber = parseInt(value);
+    setValue("");
+  }
+
+  function addition(a, b) {
+    return a + b;
+  }
+
+  function handleResult() {
+    secondNumber = parseInt(value);
+    setValue("");
+    console.log(parseInt(firstNumber));
+    console.log(parseInt(secondNumber));
+    // console.log(addition(firstNumber, secondNumber));
   }
 
   return (
@@ -90,7 +111,7 @@ function App() {
           </button>
           <button
             className="btn btn-action add"
-            onClick={() => console.log("I was clicked")}
+            onClick={() => handleOperation("plus")}
           >
             +
           </button>
@@ -99,7 +120,12 @@ function App() {
           <button className="btn zero num" onClick={() => handleClick(0)}>
             0
           </button>
-          <button className="btn btn-action equals">=</button>
+          <button
+            className="btn btn-action equals"
+            onClick={() => handleResult()}
+          >
+            =
+          </button>
         </div>
       </main>
     </div>
